@@ -1,2 +1,2 @@
-class Genre < ApplicationRecordz
+class Genre < ApplicationRecord
 end
