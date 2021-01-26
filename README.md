@@ -26,78 +26,64 @@ Things you may want to cover:
 
 ## usersテーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| nickname | string | null: false |
-| email    | string | null: false |
-| password | 
-| name     | string | null: false |
-| ruby     | string | null: false |
-| birthday | string | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: fa;se               |
+| family_name        | string | null: false               |
+| first_name         | string | null: false               |
+| family_name_ruby   | string | null: false               |
+| first_name_ruby    | string | null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
 - has_many :listings
-- belongs_to :purchases
+- has_many :purchases
 
 ## listingsテーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| product  | string | null: false |
-| text     | string | null: false |
-| category | string | null: false |
-| state    | string | null: false |
-| burden   | string | null: false |
-| area     | string | null: false |
-| days     | string | null: false |
-| price    | string | null: false |
-| user_id  | string | null: false |
+| Column      | Type    | Options     |
+| ----------- | ------- | ----------- |
+| product     | string  | null: false |
+| text        | string  | null: false |
+| category_id | integer | null: false |
+| state_id    | integer | null: false |
+| burden_id   | integer | null: false |
+| area_id     | integer | null: false |
+| days_id     | integer | null: false |
+| price_id    | integer | null: false |
+| user_id     | string  | null: false |
 
 ### Association
 - has_many :purchases
-- has_many :address, through: listings_address
-- has_many :listings_address
+- has_many :address
 - belongs_to :users
 
-## purchases
+## purchasesテーブル
 
 | Column     | Type   | Options     |
 | ---------  | ------ | ----------- |
-| card       | string | null: false |
-| date       | string | null: false |
-| security   | string | null: false |
 | user_id    | string | null: false |
 | listing_id | string | null: false |
 
 ### Association
 - belongs_to :listings
 - belongs_to :users
+- has_many :address
 
-## address
+## addressテーブル
 
-| Column     | Type   | Options     |
-| ---------- | ------ | ----------- |
-| postcode   | string | null: false |
-| prefecture | string | null: false |
-| city       | string | null: false |
-| town       | string | null: false |
-| building   | string | null: false |
-| number     | string | null: false |
-| listing_id | string | null: false |
-
-### Association
-- has_many :listings, through: listings_address
-- has_many :purchases
-- has_many :listings_address
-
-## listings_address
-
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| content      | string     |                                |
-| purchases_id | references | null: false, foreign_key: true |
-| address_id   | references | null: false, foreign_key: true |
+| Column     | Type    | Options     |
+| ---------- | ------- | ----------- |
+| postcode   | string  | null: false |
+| area_id    | integer | null: false |
+| city       | string  | null: false |
+| town       | string  | null: false |
+| building   | string  | null: false |
+| number     | string  | null: false |
+| listing_id | string  | null: false |
 
 ### Association
 - belongs_to :listings
-- belongs_to :address
+- belongs_to :purchases
