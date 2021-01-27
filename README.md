@@ -43,47 +43,47 @@ Things you may want to cover:
 
 ## listingsテーブル
 
-| Column      | Type    | Options     |
-| ----------- | ------- | ----------- |
-| product     | string  | null: false |
-| text        | string  | null: false |
-| category_id | integer | null: false |
-| state_id    | integer | null: false |
-| burden_id   | integer | null: false |
-| area_id     | integer | null: false |
-| days_id     | integer | null: false |
-| price_id    | integer | null: false |
-| user_id     | string  | null: false |
+| Column      | Type       | Options                   |
+| ----------- | ---------- | ------------------------- |
+| product     | string     | null: false               |
+| text        | text       | null: false               |
+| category_id | integer    | null: false               |
+| state_id    | integer    | null: false               |
+| burden_id   | integer    | null: false               |
+| area_id     | integer    | null: false               |
+| days_id     | integer    | null: false               |
+| price       | string     | null: false               |
+| user_id     | references | null: false, foreign: true|
 
 ### Association
-- has_many :purchases
+- has_many :purchase
 - has_many :address
-- belongs_to :users
+- belongs_to :user
 
 ## purchasesテーブル
 
-| Column     | Type   | Options     |
-| ---------  | ------ | ----------- |
-| user_id    | string | null: false |
-| listing_id | string | null: false |
+| Column     | Type       | Options                    |
+| ---------  | ---------- | -------------------------- |
+| user_id    | references | null: false, foreign: true |
+| listing_id | references | null: false, foreign: true |
 
 ### Association
-- belongs_to :listings
-- belongs_to :users
-- has_many :address
+- belongs_to :listing
+- belongs_to :user
+- belongs_to :address
 
 ## addressテーブル
 
-| Column     | Type    | Options     |
-| ---------- | ------- | ----------- |
-| postcode   | string  | null: false |
-| area_id    | integer | null: false |
-| city       | string  | null: false |
-| town       | string  | null: false |
-| building   | string  | null: false |
-| number     | string  | null: false |
-| listing_id | string  | null: false |
+| Column      | Type       | Options                    |
+| ----------- | ---------- | -------------------------- |
+| postcode    | string     | null: false                |
+| area_id     | integer    | null: false                |
+| city        | string     | null: false                |
+| town        | string     | null: false                |
+| building    | string     |                            |
+| number      | string     | null: false                |
+| listing_id  | string     | null: false                |
+| purchase_id | references | null: false, foreign: true |
 
 ### Association
-- belongs_to :listings
-- belongs_to :purchases
+- belongs_to :purchase
