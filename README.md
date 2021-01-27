@@ -51,12 +51,12 @@ Things you may want to cover:
 | state_id    | integer    | null: false               |
 | burden_id   | integer    | null: false               |
 | area_id     | integer    | null: false               |
-| days_id     | integer    | null: false               |
-| price       | string     | null: false               |
+| day_id      | integer    | null: false               |
+| price       | integer    | null: false               |
 | user        | references | null: false, foreign: true|
 
 ### Association
-- belongs_to :purchase
+- has_one :purchase
 - belongs_to :user
 
 ## purchasesテーブル
