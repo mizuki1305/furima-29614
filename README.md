@@ -53,24 +53,23 @@ Things you may want to cover:
 | area_id     | integer    | null: false               |
 | days_id     | integer    | null: false               |
 | price       | string     | null: false               |
-| user_id     | references | null: false, foreign: true|
+| user        | references | null: false, foreign: true|
 
 ### Association
-- has_many :purchase
-- has_many :address
+- belongs_to :purchase
 - belongs_to :user
 
 ## purchasesテーブル
 
 | Column     | Type       | Options                    |
 | ---------  | ---------- | -------------------------- |
-| user_id    | references | null: false, foreign: true |
-| listing_id | references | null: false, foreign: true |
+| user       | references | null: false, foreign: true |
+| listing    | references | null: false, foreign: true |
 
 ### Association
 - belongs_to :listing
 - belongs_to :user
-- belongs_to :address
+- has_one :address
 
 ## addressテーブル
 
@@ -82,8 +81,7 @@ Things you may want to cover:
 | town        | string     | null: false                |
 | building    | string     |                            |
 | number      | string     | null: false                |
-| listing_id  | string     | null: false                |
-| purchase_id | references | null: false, foreign: true |
+| purchase    | references | null: false, foreign: true |
 
 ### Association
 - belongs_to :purchase
