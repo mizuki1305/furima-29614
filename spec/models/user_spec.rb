@@ -51,6 +51,26 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
+      it "family_nameが全角（漢字・ひらがな・カタカナ）以外は登録できない" do
+        @user.family_name = "1234"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name is invalid")
+      end
+      it "first_nameが全角（漢字・ひらがな・カタカナ）以外は登録できない" do
+        @user.first_name = "1234"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid")
+      end
+      it "family_name_rubyが全角（カタカナ）以外は登録できない" do
+        @user.family_name_ruby = "ひらがな"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family name ruby is invalid")
+      end
+      it "first_name_rubyが全角（カタカナ）以外は登録できない" do
+        @user.first_name_ruby = "ひらがな"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name ruby is invalid")
+      end
       it "family_nameが空だと登録できない" do
         @user.family_name = nil
         @user.valid?
