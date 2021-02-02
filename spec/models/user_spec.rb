@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-#   pending "add some examples to (or delete) #{__FILE__}"
-# end
 
 describe User do
   before do
@@ -20,22 +18,43 @@ describe User do
         @user.password_confirmation = "000000"
         expect(@user).to be_valid
       end
+      it "emailに@が存在しないと登録できない"do
+        expect(@user).to be_valid
+      end
     end
 
     context '新規登録がうまくいかないとき' do
       it "nicknameが空だと登録できない" do
+        @user.nickname = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
       it "emailが空だと登録できない" do
-      end
-      it "emailに@が存在しないと登録できない"do
+        @user.email = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email can't be blank")
       end
       it "passwordが空だと登録できない" do
+        @user.password = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password can't be blank")
       end
       it "passwordが5文字以下だと登録できない" do
+        @user.password = "12345"
+        @user.password_confirmation = "12345"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
-      it "pwsswordが存在してもencrypted_passwordが空では登録できない" do
+      it "passwordとpassword_confirmationが不一致では登録できないこと" do
+        @user.password = "123456"
+        @user.password_confirmation = "1234567"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
       it "birthdayが空だと登録できない" do
+        @user.birthday = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
     end
   end
