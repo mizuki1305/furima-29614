@@ -25,6 +25,18 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
+      it "emailが一意性でないと登録できない" do
+        @user.save
+        another_user = FactoryBot.build(:user)
+        another_user.email = @user.email
+        another_user.valid?
+        expect(another_user.errors.full_messages).to include("Email has already been taken")  
+      end
+      it "emailに＠がないと登録できない" do
+        @user.email = "#$%&"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
       it "passwordが空だと登録できない" do
         @user.password = nil
         @user.valid?
