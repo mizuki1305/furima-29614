@@ -8,16 +8,15 @@ class Listing < ApplicationRecord
     validates :area_id
     validates :day_id
     validates :price
-    validates :user
   end
 
   has_one :purchase
   belongs_to :user
   has_one_attached :image
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category_id
-  belongs_to :state_id
-  belongs_to :burden_id
-  belongs_to :area_id
-  belongs_to :day_id
+  belongs_to :category
+  belongs_to :state
+  belongs_to :burden
+  belongs_to :area
+  belongs_to :day
 end

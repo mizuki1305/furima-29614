@@ -9,11 +9,14 @@ class ListingsController < ApplicationController
   end
 
   def create
-    Listing.create(listing_params)
+    @listing = Listing.create(listing_params)
+    redirect_to root_path
+    # redirect_to / render
   end
 
   private
   def listing_params
-    params.require(:listing).premit(:product, :text, :category_id, :state_id, :burden_id, :area_id, :day_id, :price, :user)
+    params.require(:listing).permit(:product, :text, :category_id, :state_id, :burden_id, :area_id, :day_id, :price, :image).merge(user_id: current_user.id)
   end
+
 end
