@@ -14,4 +14,10 @@ class Listing < ApplicationRecord
   has_one :purchase
   belongs_to :user
   has_one_attached :image
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category_id
+  belongs_to :state_id
+  belongs_to :burden_id
+  belongs_to :area_id
+  belongs_to :day_id
 end
