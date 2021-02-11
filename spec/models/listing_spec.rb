@@ -5,7 +5,7 @@ RSpec.describe Listing, type: :model do
 
   before do
     @user = FactoryBot.create(:user)
-    @listing = FactoryBot.build(:listing, @user.id)
+    @listing = FactoryBot.build(:listing)
   end
 
 

@@ -9,6 +9,7 @@ FactoryBot.define do
     day_id       {"3"}
     price        {Faker::Number.non_zero_digit}
 
+    association :user
     after(:build) do |listing|
       listing.image.attach(io: File.open('public/test_image.png'), filename: 'test_image.png')
     end
