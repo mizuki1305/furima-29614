@@ -7,7 +7,7 @@ class Listing < ApplicationRecord
     validates :burden_id
     validates :area_id
     validates :day_id
-    validates :price
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999}, format: { with: /\A[０-９]+\z/ }
   end
 
   has_one :purchase
