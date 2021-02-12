@@ -10,9 +10,12 @@ class ListingsController < ApplicationController
   end
 
   def create
-    @listing = Listing.create(listing_params)
-    redirect_to root_path
-    # redirect_to / render
+    @listing = Listing.new(listing_params)
+    if @listing.save
+      redirect_to @listing, notice:'User was successfully created'
+    else
+      render :new
+    end
   end
 
   private
