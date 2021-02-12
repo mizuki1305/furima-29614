@@ -11,4 +11,7 @@ class User < ApplicationRecord
     validates :first_name_ruby, format: { with: /\A[ァ-ヶー－]+\z/ }
     validates :birthday
   end
+
+  has_many :listings
+  has_many :purchases
 end
