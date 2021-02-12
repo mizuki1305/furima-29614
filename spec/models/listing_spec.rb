@@ -17,8 +17,6 @@ describe '商品出品' do
   end
 
   context '商品出品がうまく行かない場合'do
-    it "ログインしていないと商品出品ができない" do
-    end
     it "puroductが空だと商品出品できない" do
       @listing.product = nil
       @listing.valid?
@@ -35,7 +33,7 @@ describe '商品出品' do
       expect(@listing.errors.full_messages).to include("Category can't be blank")
     end
     it "category_idがid:1だと商品出品できない" do
-      @listing.category_id = "1"
+      @listing.category_id = 1
       @listing.valid?
       expect(@listing.errors.full_messages).to include("Category must be other than 1")
     end
@@ -45,7 +43,7 @@ describe '商品出品' do
       expect(@listing.errors.full_messages).to include("State can't be blank")
     end
     it "state_idがid:1だと商品出品できない" do
-      @listing.state_id = "1"
+      @listing.state_id = 1
       @listing.valid?
       expect(@listing.errors.full_messages).to include("State must be other than 1")
     end
@@ -55,7 +53,7 @@ describe '商品出品' do
       expect(@listing.errors.full_messages).to include("Burden can't be blank")
     end
     it "burden_idがid:1だと商品出品できない" do
-      @listing.burden_id = "1"
+      @listing.burden_id = 1
       @listing.valid?
       expect(@listing.errors.full_messages).to include("Burden must be other than 1")
     end
@@ -65,7 +63,7 @@ describe '商品出品' do
       expect(@listing.errors.full_messages).to include("Area can't be blank")
     end
     it "area_idがid:1だと商品出品できない" do
-      @listing.area_id = "1"
+      @listing.area_id = 1
       @listing.valid?
       expect(@listing.errors.full_messages).to include("Area must be other than 1")
     end
@@ -75,7 +73,7 @@ describe '商品出品' do
       expect(@listing.errors.full_messages).to include("Day can't be blank")
     end
     it "day_idがid:1だと商品出品できない" do
-      @listing.day_id = "1"
+      @listing.day_id = 1
       @listing.valid?
       expect(@listing.errors.full_messages).to include("Day must be other than 1")
     end

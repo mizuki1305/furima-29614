@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @listings = Listing.all
+    # @listings = Listing.all
   end
 
   def new
