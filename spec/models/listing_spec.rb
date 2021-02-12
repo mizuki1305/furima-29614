@@ -59,6 +59,16 @@ describe '商品出品' do
       @listing.valid?
       expect(@listing.errors.full_messages).to include("Price can't be blank")
     end
+    it "priceが半角数字のみでないと商品出品できない" do
+      @listing.price = "a#あ"
+      @listing.valid?
+      expect(@listing.errors.full_messages).to include("Price is not a number")
+    end
+    it "priceが300から9999999以内出ないと商品出品ができない" do
+      @listing.price = 100
+      @listing.valid?
+      expect(@listing.errors.full_messages).to include("Price must be greater than or equal to 300")
+    end
   end
 end
 

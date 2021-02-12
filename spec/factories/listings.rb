@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :listing do
-    product      {Faker::Food.dish}
-    text         {Faker::Food.dish}
-    category_id  {"3"}
-    state_id     {"3"}
-    burden_id    {"3"}
-    area_id      {"3"}
-    day_id       {"3"}
-    price        {Faker::Number.non_zero_digit}
+    product      {"Test"}
+    text         {"テスト"}
+    category_id  {3}
+    state_id     {3}
+    burden_id    {3}
+    area_id      {3}
+    day_id       {3}
+    price        {300}
 
     association :user
     after(:build) do |listing|
