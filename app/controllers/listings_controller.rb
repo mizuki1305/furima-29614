@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    # @listings = Listing.all
+    @listings = Listing.all
   end
 
   def new
@@ -12,7 +12,7 @@ class ListingsController < ApplicationController
   def create
     @listing = Listing.new(listing_params)
     if @listing.save
-      redirect_to @listing, notice:'User was successfully created'
+      redirect_to :root, notice:'User was successfully created'
     else
       render :new
     end
