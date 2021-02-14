@@ -128,7 +128,7 @@
 
       <% @listings.each do |listing| %>
       <li class='list'>
-        <%= link_to listing_path(listing.id) do %>
+        <%= link_to listings_path(listing.id) do %>
         <div class='item-img-content'>
           <%= image_tag listing.image, class: "item-img" %>
 
