@@ -14,8 +14,10 @@ class ListingsController < ApplicationController
   end
 
   def edit
-    if current_user.id != @listing.user.id
-      return redirect_to root_path
+    if current_user.id == @listing.user.id
+      redirect_to root_path
+    else
+      render :edit
     end
   end
 
