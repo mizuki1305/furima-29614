@@ -14,19 +14,15 @@ class ListingsController < ApplicationController
   end
 
   def edit
-    if current_user.id == @listing.user.id
-      redirect_to root_path
-    else
-      render :edit
-    end
   end
 
   def update
-    @listing.update(listing_params)
-    if @listing.valid?
-      redirect_to listing_path, notice:'User was successfully created'
+    if current_user.id == @listing.user.id
+      @listing.update(listing_params)
+      return redirect_to listing_path if @listing.valid?
+        render :edit
     else
-      render :edit
+      redirect_to root_path
     end
   end
 
