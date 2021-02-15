@@ -19,8 +19,11 @@ class ListingsController < ApplicationController
 
   def update
     @listing = Listing.find(params[:id])
-    if @listing.update(listing_params)
-      render :show
+    @listing.update(listing_params)
+    if @listing.valid?
+      redirect_to :root, notice:'User was successfully created'
+    else
+      render :edit
     end
   end
 
