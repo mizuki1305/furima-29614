@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create]
+    before_action :authenticate_user!, only: [:new, :create, :update]
+    before_action :set_listing, only: [:show, :edit, :update]
 
   def index
     @listings = Listing.all
@@ -10,15 +11,15 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @listing = Listing.find(params[:id])
   end
 
   def edit
-    @listing = Listing.find(params[:id])
+    if current_user.id != @listing.user.id
+      return redirect_to root_path
+    end
   end
 
   def update
-    @listing = Listing.find(params[:id])
     @listing.update(listing_params)
     if @listing.valid?
       redirect_to :root, notice:'User was successfully created'
@@ -34,6 +35,10 @@ class ListingsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def set_listing
+    @listing = Listing.find(params[:id])
   end
 
   private
