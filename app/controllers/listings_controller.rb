@@ -13,6 +13,17 @@ class ListingsController < ApplicationController
     @listing = Listing.find(params[:id])
   end
 
+  def edit
+    @listing = Listing.find(params[:id])
+  end
+
+  def update
+    @listing = Listing.find(params[:id])
+    if @listing.update(listing_params)
+      render :show
+    end
+  end
+
   def create
     @listing = Listing.new(listing_params)
     if @listing.save
