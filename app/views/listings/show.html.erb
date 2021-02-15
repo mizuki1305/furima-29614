@@ -4,10 +4,10 @@
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
-      <%= "商品名" %>
+      <%= @listing.product %>
     </h2>
     <div class='item-img-content'>
-      <%= img_tag "item-sample.png" ,class:"item-box-img" %>
+      <%= image_tag @listing.image ,class:"item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
       <div class='sold-out'>
         <span>Sold Out!!</span>
@@ -16,10 +16,10 @@
     </div>
     <div class="item-price-box">
       <span class="item-price">
-        ¥ 999,999,999
+        <%= @listing.price %>
       </span>
       <span class="item-postage">
-        <%= '配送料負担' %>
+        <%= @listing.burden.name %>
       </span>
     </div>
 
@@ -34,33 +34,33 @@
     <% end %>
 
     <div class="item-explain-box">
-      <span><%= "商品説明" %></span>
+      <span><%= @listing.text %></span>
     </div>
     <table class="detail-table">
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= "出品者名" %></td>
+          <td class="detail-value"><%= @listing.user.nickname %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= "カテゴリー名" %></td>
+          <td class="detail-value"><%= @listing.category.name %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= "商品の状態" %></td>
+          <td class="detail-value"><%= @listing.state.name %></td>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= "発送料の負担" %></td>
+          <td class="detail-value"><%= @listing.burden.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= "発送元の地域" %></td>
+          <td class="detail-value"><%= @listing.area.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= "発送日の目安" %></td>
+          <td class="detail-value"><%= @listing.day.name %></td>
         </tr>
       </tbody>
     </table>
@@ -100,7 +100,7 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="#" class='another-item'><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <a href="#" class='another-item'><%= @listing.category.name %>をもっと見る</a>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
