@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
     before_action :authenticate_user!, only: [:new, :create, :update]
     before_action :set_listing, only: [:show, :edit, :update]
+    before_action :set_list, only: [:edit, :update]
 
   def index
     @listings = Listing.all
@@ -17,12 +18,10 @@ class ListingsController < ApplicationController
   end
 
   def update
-    if current_user.id == @listing.user.id
-      @listing.update(listing_params)
-      return redirect_to listing_path if @listing.valid?
-        render :edit
+    if @listing.update(listing_params)
+      return redirect_to listing_path
     else
-      redirect_to root_path
+      render :edit
     end
   end
 
@@ -38,6 +37,11 @@ class ListingsController < ApplicationController
   def set_listing
     @listing = Listing.find(params[:id])
   end
+
+  def set_list
+    return redirect_to root_path if current_user.id != @listing.user.id
+      redirect_to root_path
+    end
 
   private
   def listing_params
