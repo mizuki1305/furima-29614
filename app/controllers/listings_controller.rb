@@ -22,7 +22,7 @@ class ListingsController < ApplicationController
   def update
     @listing.update(listing_params)
     if @listing.valid?
-      redirect_to :root, notice:'User was successfully created'
+      redirect_to listing_path, notice:'User was successfully created'
     else
       render :edit
     end
