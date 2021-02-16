@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
-    before_action :set_listing, only: [:show, :edit, :update]
-    before_action :set_list, only: [:edit, :update]
+    before_action :set_listing, only: [:show, :edit, :update, :destroy]
+    before_action :set_list, only: [:edit, :update, :destroy]
 
   def index
     @listings = Listing.includes(:user).order("created_at DESC")
@@ -24,7 +24,15 @@ class ListingsController < ApplicationController
       render :edit
     end
   end
-
+  
+  def destroy
+    if @listing.destroy
+      redirect_to root_path
+    else
+      render :show
+    end
+  end
+  
   def create
     @listing = Listing.new(listing_params)
     if @listing.save
@@ -42,11 +50,10 @@ class ListingsController < ApplicationController
   def set_listing
     @listing = Listing.find(params[:id])
   end
-
+  
   def set_list
     if @listing.user.id != current_user.id
       redirect_to root_path
     end
   end
-
 end
