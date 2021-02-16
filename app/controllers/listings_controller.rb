@@ -33,10 +33,20 @@ class ListingsController < ApplicationController
       render :new
     end
   end
-
+  
   private
   def listing_params
     params.require(:listing).permit(:product, :text, :category_id, :state_id, :burden_id, :area_id, :day_id, :price, :image).merge(user_id: current_user.id)
+  end
+  
+  def set_listing
+    @listing = Listing.find(params[:id])
+  end
+
+  def set_list
+    unless user_signed_in?
+      redirect_to action: :new
+    end
   end
 
   def set_listing
