@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
     before_action :set_listing, only: [:show, :edit, :update, :destroy]
-    before_action :set_list, only: [:edit, :update]
+    before_action :set_list, only: [:edit, :update, :destroy]
 
   def index
     @listings = Listing.includes(:user).order("created_at DESC")
