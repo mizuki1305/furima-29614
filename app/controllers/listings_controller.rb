@@ -1,10 +1,10 @@
 class ListingsController < ApplicationController
-    before_action :authenticate_user!, only: [:new, :create, :update]
+    before_action :authenticate_user!, except: [:index, :show]
     before_action :set_listing, only: [:show, :edit, :update]
     before_action :set_list, only: [:edit, :update]
 
   def index
-    @listings = Listing.all
+    @listings = Listing.includes(:user).order("created_at DESC")
   end
 
   def new
@@ -34,18 +34,20 @@ class ListingsController < ApplicationController
     end
   end
 
+  private
+  def listing_params
+    params.require(:listing).permit(:product, :text, :category_id, :state_id, :burden_id, :area_id, :day_id, :price, :image).merge(user_id: current_user.id)
+  end
+
   def set_listing
     @listing = Listing.find(params[:id])
   end
 
   def set_list
-    return redirect_to root_path if current_user.id != @listing.user.id
+    @listing = Listing.find(params[:id])
+    if @listing.user.id != current_user.id
       redirect_to root_path
     end
-
-  private
-  def listing_params
-    params.require(:listing).permit(:product, :text, :category_id, :state_id, :burden_id, :area_id, :day_id, :price, :image).merge(user_id: current_user.id)
   end
 
 end
