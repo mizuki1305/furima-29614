@@ -12,7 +12,17 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @listing = Listing.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @listing.update(listing_params)
+      return redirect_to listing_path
+    else
+      render :edit
+    end
   end
 
   def create
@@ -34,8 +44,8 @@ class ListingsController < ApplicationController
   end
 
   def set_list
-    unless user_signed_in?
-      redirect_to action: :new
+    if @listing.user.id != current_user.id
+      redirect_to root_path
     end
   end
 
