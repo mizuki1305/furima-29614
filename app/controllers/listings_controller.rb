@@ -44,16 +44,6 @@ class ListingsController < ApplicationController
   end
 
   def set_list
-    unless user_signed_in?
-      redirect_to action: :new
-    end
-  end
-
-  def set_listing
-    @listing = Listing.find(params[:id])
-  end
-
-  def set_list
     if @listing.user.id != current_user.id
       redirect_to root_path
     end
