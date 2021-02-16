@@ -44,7 +44,6 @@ class ListingsController < ApplicationController
   end
 
   def set_list
-    @listing = Listing.find(params[:id])
     if @listing.user.id != current_user.id
       redirect_to root_path
     end
